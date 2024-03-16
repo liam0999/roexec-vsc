@@ -1,6 +1,6 @@
 ---@diagnostic disable: undefined-global
 
-local host = "10.0.0.34"
+local host = "localhost"
 local port = 10581
 
 local socket

@@ -22,19 +22,25 @@ new ws.WebSocketServer({ port: extensionConfig.port })
 	})
 })
 
+function execute() {
+	const textEditor = vscode.window.activeTextEditor
+	
+	if (!socketConnection) return vscode.window.showErrorMessage("Unable to execute: Not connected")
+	if (!textEditor) return vscode.window.showErrorMessage("Unable to execute: Not in file")
+
+	socketConnection.send(textEditor.document.getText())
+	vscode.window.showInformationMessage("Executed")
+}
+
 function activate(context) {
 
-	const executeCommand = vscode.commands.registerCommand("roexec-vsc.execute", function() {
-		const textEditor = vscode.window.activeTextEditor
-		
-		if (!socketConnection) return vscode.window.showErrorMessage("Unable to execute: Not connected")
-		if (!textEditor) return vscode.window.showErrorMessage("Unable to execute: Not in file")
-
-		socketConnection.send(textEditor.document.getText())
-		vscode.window.showInformationMessage("Executed")
-	})
-
+	const executeCommand = vscode.commands.registerCommand("roexec-vsc.execute", execute)
 	context.subscriptions.push(executeCommand);
+
+	const executeButton = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right)
+	executeButton.text = "Roblox Execute"
+	executeButton.command = "roexec-vsc.execute"
+	executeButton.show()
 
 }
 
