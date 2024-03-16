@@ -5,7 +5,7 @@ const extensionConfig = vscode.workspace.getConfiguration("roexec-vsc")
 
 var socketConnection
 
-console.log(`Extension Started on ${extensionConfig.port}`)
+vscode.window.showInformationMessage(`Extension Started on ${extensionConfig.port}`)
 
 new ws.WebSocketServer({ port: extensionConfig.port })
 .on("connection", async (connection) => {
@@ -37,8 +37,8 @@ function activate(context) {
 	const executeCommand = vscode.commands.registerCommand("roexec-vsc.execute", execute)
 	context.subscriptions.push(executeCommand);
 
-	const executeButton = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right)
-	executeButton.text = "Roblox Execute"
+	const executeButton = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left)
+	executeButton.text = "$(triangle-right) Roblox Execute"
 	executeButton.command = "roexec-vsc.execute"
 	executeButton.show()
 
