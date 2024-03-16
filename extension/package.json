@@ -1,0 +1,54 @@
+{
+  "publisher": "octohook",
+  "name": "roexec-vsc",
+  "displayName": "RoExec-VSC",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.87.0"
+  },
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/liam0999/roexec-vsc.git"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [ "onStartupFinished" ],
+  "main": "./extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Roblox Execute",
+      "properties": {
+        "roexec-vsc.port": {
+          "type": "number",
+          "default": 10581,
+          "description": "port to open websocket on, must match port on client"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "roexec-vsc.execute",
+        "title": "roblox-execute"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.87.0",
+    "@vscode/test-cli": "^0.0.6",
+    "@vscode/test-electron": "^2.3.9",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "ws": "^8.16.0"
+  }
+}
