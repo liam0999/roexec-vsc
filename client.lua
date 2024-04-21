@@ -17,6 +17,8 @@ end
 
 connect()
 
+repeat task.wait() until game.Players and game.Players.LocalPlayer
+
 socket:Send(`Connected to {game.Players.LocalPlayer.Name}`)
 
 socket.OnMessage:Connect(function(message)
